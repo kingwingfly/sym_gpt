@@ -1,0 +1,12 @@
+[package]
+name = "bin"
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+edition.workspace = true
+description = ""
+
+[dependencies]
+chat = { path = "../chat" }
+tokio = { version = "1", features = ["full"] }
+cliclack = "0.3.2"

@@ -1,0 +1,22 @@
+[workspace]
+members = ["bin", "chat"]
+resolver = "2"
+
+[workspace.package]
+version = "0.0.1"
+authors = ["Louis <836250617@qq.com>"]
+description = "Use chatGPT and sympy to solve math problems"
+license = "MIT"
+edition = "2021"
+repository = "https://github.com/kingwingfly/sym_gpt"
+documentation = "https://docs.rs/sym_gpt"
+
+[profile.release]
+lto = "fat"
+opt-level = 3
+codegen-units = 1
+strip = "debuginfo"
+panic = "abort"
+
+[profile.dev.package.num-bigint-dig]
+opt-level = 3

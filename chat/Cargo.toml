@@ -1,0 +1,26 @@
+[package]
+name = "chat"
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+edition.workspace = true
+description = ""
+
+[dependencies]
+cliclack = "0.3.2"
+futures-util = "0.3.30"
+reqwest = { version = "0.12.5", features = ["json", "stream"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1" }
+url = { version = "2.5.2", features = ["serde"] }
+
+
+[target.'cfg(target_os = "linux")'.dependencies]
+encrypt_config = { version = "0.3", features = [
+    "full",
+    "linux-secret-service",
+    "default_config_dir",
+] }
+
+[target.'cfg(not(target_os = "linux"))'.dependencies]
+encrypt_config = { version = "0.3", features = ["full", "default_config_dir"] }
