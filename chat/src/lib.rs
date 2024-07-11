@@ -8,7 +8,7 @@ use std::process::Command;
 use url::Url;
 
 const SYSTEM: &str = r#"I need you solve the following latex formula with python's **sympy** library.
-You should only give me a python function with signature `solution() -> None` which prints the answer directly.
+You should only give me a python function with signature `formula()` which returns the simplified formula.
 And I only need the python function code, please do **not** answer or do anything else like interpreting code or call `solution`."#;
 
 #[derive(Default)]
@@ -58,66 +58,69 @@ impl Solver {
                         .multiline()
                         .required(true)
                         .interact()
-                        .unwrap(),
+                        .expect("Failed to get input"),
                 },
             ],
         }
     }
 
     pub async fn run(&self) {
-        let mut python_code = String::new();
         let secret = self.config.get::<Secret>().unwrap();
         let mut stdout = io::stdout();
-        let mut stream = self
-            .client
-            .post(secret.endpoint.clone())
-            .header(header::AUTHORIZATION, format!("Bearer {}", secret.api_key))
-            .json(&Self::req())
-            .send()
-            .await
-            .unwrap()
-            .bytes_stream();
-        while let Some(item) = stream.next().await {
-            let item = item.unwrap();
-            let chunk = std::str::from_utf8(&item).expect("Invalid UTF-8 sequence");
-            for chunk in chunk.split("\n\n") {
-                if let Some(chunk) = chunk.strip_prefix("data: ") {
-                    if chunk == "[DONE]" {
-                        break;
-                    }
-                    if let Some(chunk) = serde_json::from_str::<Chunk>(chunk).unwrap().content() {
-                        python_code.push_str(&chunk);
-                        stdout.write_all(chunk.as_bytes()).unwrap();
-                        stdout.flush().unwrap();
+
+        loop {
+            let mut python_code = String::new();
+            let mut stream = self
+                .client
+                .post(secret.endpoint.clone())
+                .header(header::AUTHORIZATION, format!("Bearer {}", secret.api_key))
+                .json(&Self::req())
+                .send()
+                .await
+                .unwrap()
+                .bytes_stream();
+            while let Some(item) = stream.next().await {
+                let item = item.unwrap();
+                let chunk = std::str::from_utf8(&item).expect("Invalid UTF-8 sequence");
+                for chunk in chunk.split("\n\n") {
+                    if let Some(chunk) = chunk.strip_prefix("data: ") {
+                        if chunk == "[DONE]" {
+                            break;
+                        }
+                        if let Some(chunk) = serde_json::from_str::<Chunk>(chunk).unwrap().content()
+                        {
+                            python_code.push_str(&chunk);
+                            stdout.write_all(chunk.as_bytes()).unwrap();
+                            stdout.flush().unwrap();
+                        }
                     }
                 }
             }
-        }
-        stdout.write_all(b"\n").unwrap();
+            stdout.write_all(b"\n").unwrap();
 
-        let sym_py_path = std::env::current_exe()
-            .unwrap()
-            .parent()
-            .unwrap()
-            .join("dist/sym.py");
+            if !Confirm::new("Re-generate?").interact().unwrap() {
+                let sym_py_path = std::env::current_exe()
+                    .unwrap()
+                    .parent()
+                    .unwrap()
+                    .join("dist/sym.py");
 
-        python_code = python_code.lines().fold(String::new(), |acc, line| {
-            if !line.contains("```") {
-                format!("{}\n{}", acc, line)
-            } else {
-                acc
+                python_code = python_code.lines().fold(String::new(), |acc, line| {
+                    if !line.contains("```") {
+                        format!("{}\n{}", acc, line)
+                    } else {
+                        acc
+                    }
+                });
+                cliclack::outro("Result:").unwrap();
+                Command::new("python")
+                    .args([
+                        sym_py_path.as_os_str().to_str().unwrap(),
+                        python_code.trim(),
+                    ])
+                    .status()
+                    .unwrap();
             }
-        });
-
-        if !Confirm::new("Re-generate?").interact().unwrap() {
-            cliclack::outro("Result:").unwrap();
-            Command::new("python")
-                .args([
-                    sym_py_path.as_os_str().to_str().unwrap(),
-                    python_code.trim(),
-                ])
-                .status()
-                .unwrap();
         }
     }
 
