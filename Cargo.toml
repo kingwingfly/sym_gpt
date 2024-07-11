@@ -3,7 +3,7 @@ members = ["sym", "chat"]
 resolver = "2"
 
 [workspace.package]
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Louis <836250617@qq.com>"]
 description = "Use chatGPT and sympy to solve math problems"
 license = "MIT"

@@ -109,7 +109,8 @@ impl Solver {
             }
         });
 
-        if !Confirm::new("Try again?").interact().unwrap() {
+        if !Confirm::new("Re-generate?").interact().unwrap() {
+            cliclack::outro("Result:").unwrap();
             Command::new("python")
                 .args([
                     sym_py_path.as_os_str().to_str().unwrap(),

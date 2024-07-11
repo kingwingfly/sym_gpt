@@ -1,12 +1,14 @@
 import sys
+from typing import Any
+from sympy import pprint
 
 
 def main():
     if len(sys.argv) > 1:
         code = sys.argv[1]
-        buffer = {}
+        buffer: dict[str, Any] = {"print": pprint}
         exec(code, buffer)
-        expr = buffer["solution"]()
+        buffer["solution"]()
     else:
         print("No command-line arguments provided.")
 
