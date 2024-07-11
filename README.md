@@ -90,7 +90,7 @@ source venv/bin/activate.fish
 pip install sympy mpmath
 
 # run
-sym
+./sym
 
 deactivate
 ```
