@@ -66,6 +66,8 @@
 
 `sym_gpt` use chatGPT to convert latex to python's `sympy` code and solve it.
 
+![taylor](images/taylor_expand.png)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
