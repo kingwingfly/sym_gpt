@@ -35,11 +35,9 @@ impl Default for Secret {
 
 impl Solver {
     pub fn new() -> Self {
-        let mut config = Config::new();
-        config.load_source::<Secret>();
         Self {
             client: Client::new(),
-            config,
+            config: Config::default(),
         }
     }
 
@@ -65,7 +63,7 @@ impl Solver {
     }
 
     pub async fn run(&self) {
-        let secret = self.config.get::<Secret>().unwrap();
+        let secret = self.config.get::<Secret>();
         let mut stdout = io::stdout();
 
         loop {
@@ -125,13 +123,12 @@ impl Solver {
     }
 
     pub fn set_config(&mut self) {
-        let mut secret = self.config.get_mut::<Secret>().unwrap();
+        let mut secret = self.config.get_mut::<Secret>();
         secret.endpoint = Input::new("Endpoint")
             .default_input(secret.endpoint.as_str())
             .interact()
             .unwrap();
         secret.api_key = Password::new("API key").interact().unwrap();
-        secret.save().expect("Failed to save config");
     }
 }
 
