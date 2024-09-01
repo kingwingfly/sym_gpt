@@ -9,4 +9,4 @@ description = ""
 [dependencies]
 chat = { path = "../chat" }
 tokio = { version = "1", features = ["full"] }
-cliclack = "0.3.3"
+cliclack = "0.3.4"
