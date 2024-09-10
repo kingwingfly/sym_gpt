@@ -53,7 +53,7 @@ jobs:
           target: ${{ matrix.target }}
           # (optional) Comma-separated list of additional files to be included to archive.
           # Note that glob pattern is not supported yet.
-          include: dist
+          include: dist,README.md
           # (optional) Whether to create the leading directory in the archive or not. default to false.
           leading-dir: true
           # (optional) Archive name (non-extension portion of filename) to be uploaded.

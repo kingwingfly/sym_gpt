@@ -94,7 +94,7 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "chat"
-version = "0.0.4"
+version = "0.0.5"
 dependencies = [
  "cliclack",
  "encrypt_config",
@@ -1256,7 +1256,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
 name = "sym"
-version = "0.0.4"
+version = "0.0.5"
 dependencies = [
  "chat",
  "cliclack",
