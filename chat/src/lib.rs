@@ -111,7 +111,7 @@ impl Solver {
                     }
                 });
                 cliclack::outro("Result:").unwrap();
-                Command::new("python")
+                Command::new("python3")
                     .args([
                         sym_py_path.as_os_str().to_str().unwrap(),
                         python_code.trim(),

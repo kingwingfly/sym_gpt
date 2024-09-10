@@ -86,8 +86,8 @@
 ```sh
 # set up python venv
 # e.g. for fish shell
-python -m venv venv
-source venv/bin/activate.fish
+python -m venv .venv
+source .venv/bin/activate.fish
 
 # install python dependencies
 pip install sympy mpmath
@@ -97,7 +97,7 @@ pip install sympy mpmath
 
 deactivate
 ```
-If you're using `uv`, just `uv sync`.
+If you're using `uv`, just `uv venv && uv sync`.
 
 _For more examples, please refer to the [Example](https://github.com/kingwingfly/sym_gpt/tree/dev/tests) or [Documentation](https://docs.rs/encrypt_config)_
 
