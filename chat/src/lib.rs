@@ -1,5 +1,5 @@
 use cliclack::{Confirm, Input, Password};
-use encrypt_config::{Config, SecretSource};
+use encrypt_config::{Config, PersistSource};
 use futures_util::StreamExt;
 use reqwest::{header, Client};
 use serde::{Deserialize, Serialize};
@@ -14,11 +14,11 @@ And I only need the python function code, please do **not** answer or do anythin
 #[derive(Default)]
 pub struct Solver {
     client: Client,
-    config: Config,
+    config: Config<1>,
 }
 
-#[derive(Serialize, Deserialize, SecretSource)]
-#[source(name = "sym_gpt_cfg", keyring_entry = "sym_gpt")]
+#[derive(Serialize, Deserialize, PersistSource)]
+#[source(name = "sym_gpt_cfg")]
 struct Secret {
     endpoint: Url,
     api_key: String,
