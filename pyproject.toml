@@ -1,6 +1,6 @@
 [project]
 name = "sym_gpt"
-version = "0.0.5"
+version = "0.0.6"
 description = "Use chatGPT and sympy to solve math problems"
 readme = "README.md"
 requires-python = ">=3.12"

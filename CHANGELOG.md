@@ -9,6 +9,10 @@ Note: In this file, do not use the hard wrap in the middle of a sentence for com
 -->
 
 ## [Unreleased]
+## [0.0.6] - 2024-09-10
+
+- ci
+
 ## [0.0.5] - 2024-09-10
 
 - bump deps
