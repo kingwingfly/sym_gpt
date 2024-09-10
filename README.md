@@ -97,7 +97,7 @@ pip install sympy mpmath
 
 deactivate
 ```
-If you're using `uv`, just `uv venv .venv && uv sync`.
+If you're using `uv`, just `uv sync`.
 
 _For more examples, please refer to the [Example](https://github.com/kingwingfly/sym_gpt/tree/dev/tests) or [Documentation](https://docs.rs/encrypt_config)_
 
