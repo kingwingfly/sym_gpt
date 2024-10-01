@@ -7,13 +7,13 @@ edition.workspace = true
 description = ""
 
 [dependencies]
-cliclack = "0.3.4"
+cliclack = "0.3.5"
 futures-util = "0.3.30"
-reqwest = { version = "0.12.7", features = ["json", "stream"] }
+reqwest = { version = "0.12.8", features = ["json", "stream"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1" }
 url = { version = "2.5.2", features = ["serde"] }
-encrypt_config = { version = "1.0.5", features = [
+encrypt_config = { version = "1.0.6", features = [
     "derive",
     "persist",
     "default_config_dir",

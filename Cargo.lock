@@ -107,9 +107,9 @@ dependencies = [
 
 [[package]]
 name = "cliclack"
-version = "0.3.4"
+version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c827ccada848b64fba073b64518a7416d605ad70c594b5450b5ed1d97e3b5d4"
+checksum = "6a80570d35684e725e9d2d4aaaf32bc0cbfcfb8539898f9afea3da0d2e5189e4"
 dependencies = [
  "console",
  "indicatif",
@@ -192,9 +192,9 @@ dependencies = [
 
 [[package]]
 name = "encrypt_config"
-version = "1.0.5"
+version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ecc7becf072742c1ad758cd581432bf5a91db3a96837c330ef65a80029ad0c63"
+checksum = "2e9ce74dba4147b278340b176e739d216b30fca22877a8130129e751b9750a42"
 dependencies = [
  "dirs",
  "encrypt_config_derive",
@@ -932,9 +932,9 @@ checksum = "7a66a03ae7c801facd77a29370b4faec201768915ac14a721ba36f20bc9c209b"
 
 [[package]]
 name = "reqwest"
-version = "0.12.7"
+version = "0.12.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f8f4955649ef5c38cc7f9e8aa41761d48fb9677197daea9984dc54f56aad5e63"
+checksum = "f713147fbe92361e52392c73b8c9e48c04c6625bce969ef54dc901e58e042a7b"
 dependencies = [
  "base64",
  "bytes",
