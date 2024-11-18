@@ -8,8 +8,8 @@ use std::process::Command;
 use url::Url;
 
 const SYSTEM: &str = r#"I need you solve the following latex formula with python's **sympy** library.
-You should only give me a python function with signature `formula()` which returns the simplified formula.
-And I only need the python function code, please do **not** answer or do anything else like interpreting code or call `solution`."#;
+You should only give me a python function with signature `formula()` which returns the simplified formula or result.
+And I only need the python function code, please do **not** answer or do anything else like interpreting code or call `formula`."#;
 
 #[derive(Default)]
 pub struct Solver {
